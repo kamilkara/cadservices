@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CadPad V1.0 - The Ultimate CAD Macro HUD</title>
+    <style>
+        /* CadPad Renk Paleti (Programdaki renklerin aynısı) */
+        :root {
+            --bg-dark: #1A252F;
+            --panel-bg: #2C3E50;
+            --btn-green: #27AE60;
+            --btn-green-hover: #219653;
+            --btn-orange: #D35400;
+            --btn-blue: #2980B9;
+            --text-main: #FFFFFF;
+            --text-muted: #95A5A6;
+            --accent: #F1C40F;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-scale;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+
+        /* Navigation / Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 10%;
+            background-color: rgba(26, 37, 47, 0.95);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid var(--panel-bg);
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span { color: var(--accent); }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 6px;
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: var(--btn-green);
+            color: white;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--btn-green-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 150px 10% 100px;
+            min-height: 100vh;
+            gap: 50px;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            line-height: 1.2;
+            margin-bottom: 20px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 30px;
+        }
+
+        .price-tag {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .old-price {
+            text-decoration: line-through;
+            color: var(--text-muted);
+            font-size: 1.2rem;
+        }
+
+        .new-price {
+            font-size: 2rem;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .hero-image {
+            flex: 1;
+            background-color: var(--panel-bg);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 1px solid #34495E;
+            text-align: center;
+        }
+
+        .hero-image img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 10%;
+            background-color: #151e27;
+            text-align: center;
+        }
+
+        .features h2 {
+            font-size: 2.5rem;
+            margin-bottom: 60px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .card {
+            background-color: var(--panel-bg);
+            padding: 40px 30px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+            border: 1px solid #34495E;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--btn-blue);
+        }
+
+        .card-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .card h3 {
+            margin-bottom: 15px;
+            color: var(--accent);
+        }
+
+        /* Footer CTA */
+        .cta-section {
+            padding: 100px 10%;
+            text-align: center;
+            background: linear-gradient(180deg, #151e27 0%, var(--bg-dark) 100%);
+        }
+
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 900px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding-top: 120px;
+            }
+            .hero h1 { font-size: 2.5rem; }
+            .price-tag { justify-content: center; }
+            header { padding: 15px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">CadPad<span>.</span></a>
+        <a href="#buy" class="btn btn-primary">Get CadPad V1.0</a>
+    </header>
+
+    <section class="hero">
+        <div class="hero-text">
+            <h1>Supercharge Your CAD Workflow.</h1>
+            <p>Turn any cheap macropad into a professional industry-standard tool. Zero lag, zero driver conflicts, and a smart transparent HUD that understands your intent.</p>
+            
+            <div class="price-tag">
+                <span class="old-price">$29.00</span>
+                <span class="new-price">$19.00</span>
+                <span style="background-color: var(--btn-orange); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: bold;">LIFETIME</span>
+            </div>
+
+            <a href="#buy" class="btn btn-primary" style="font-size: 1.2rem; padding: 15px 35px;">Download Now</a>
+            <p style="margin-top: 15px; font-size: 14px; color: var(--text-muted);">🔒 Secure checkout via Gumroad. Instant delivery.</p>
+        </div>
+        <div class="hero-image">
+            <img src="https://via.placeholder.com/600x400/1A252F/F1C40F?text=[Your+Awesome+CadPad+GIF+Here]" alt="CadPad HUD Action">
+            <p style="margin-top: 15px; font-weight: bold; color: var(--text-muted);">Smart Transparent HUD (No Alt-Tabbing)</p>
+        </div>
+    </section>
+
+    <section class="features">
+        <h2>Engineered for Professionals</h2>
+        <div class="grid">
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Zero-Lag Anti-Flicker</h3>
+                <p>Runs natively on Windows. No screen tearing or delay. Whether you tap, hold, or double-click, the Smart Engine catches your intent instantly.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🛡️</div>
+                <h3>Driver-Free Security</h3>
+                <p>Corporate IT blocks custom drivers? No problem. CadPad uses Hyper Key architecture to bind macros safely without triggering anti-cheat or IT alarms.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">😀</div>
+                <h3>Native Emoji & Unicode</h3>
+                <p>Speed up your architectural notes and team communication. Map emojis (🏗️, ✅, 🚀) or custom Unicode strings to any key effortlessly.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-section" id="buy">
+        <h2>Ready to win back 5 hours a week?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 40px;">Join other architects and engineers working smarter, not harder.</p>
+        <a href="YOUR_GUMROAD_LINK_HERE" class="btn btn-primary" style="font-size: 1.5rem; padding: 18px 45px;">Get Lifetime License - $19</a>
+        <div style="margin-top: 50px; color: var(--text-muted); font-size: 14px;">
+            &copy; 2026 cad.services - Built for creators.
+        </div>
+    </section>
+
+    <script>
+        // İleride buraya minik etkileşimler (Smooth Scroll vb.) eklenebilir. 
+        // Şimdilik saf HTML/CSS hızını koruyoruz.
+    </script>
+</body>
+</html>
