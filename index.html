@@ -3,13 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CadPad - The Ultimate Smart Macro HUD</title>
+    <title>OmniPad - The Universal Smart Macro HUD</title>
     <style>
         :root {
             --bg-color: #0f172a;
             --text-color: #f8fafc;
-            --accent-color: #e67e22;
-            --accent-hover: #d35400;
+            --accent-color: #f1c40f;
+            --btn-color: #27ae60;
+            --btn-hover: #219653;
             --card-bg: #1e293b;
         }
         body {
@@ -20,30 +21,117 @@
             color: var(--text-color);
             line-height: 1.6;
         }
+        /* STICKY HEADER (Üst Menü) */
+        header {
+            background-color: #1a202c;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+        .logo span {
+            color: var(--accent-color);
+        }
+        .nav-btn {
+            background-color: var(--btn-color);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .nav-btn:hover {
+            background-color: var(--btn-hover);
+        }
+
+        /* ANA İÇERİK */
         .container {
             max-width: 1000px;
             margin: 0 auto;
-            padding: 40px 20px;
+            padding: 60px 20px;
             text-align: center;
         }
         .hero h1 {
             font-size: 3.5rem;
             margin-bottom: 10px;
-            color: var(--accent-color);
+            color: #ffffff;
         }
         .hero h2 {
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             font-weight: 400;
             color: #94a3b8;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
         }
+
+        /* FİYAT ALANI (Ekran Görüntüsündeki Gibi) */
+        .pricing-hero {
+            margin-bottom: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+        }
+        .old-price {
+            text-decoration: line-through;
+            color: #64748b;
+            font-size: 1.5rem;
+        }
+        .price-tag {
+            font-size: 3rem;
+            font-weight: bold;
+            color: var(--accent-color);
+        }
+        .badge {
+            background-color: #d35400;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .main-buy-btn {
+            display: inline-block;
+            background-color: var(--btn-color);
+            color: white;
+            padding: 18px 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            transition: background-color 0.3s;
+        }
+        .main-buy-btn:hover {
+            background-color: var(--btn-hover);
+        }
+        .secure-text {
+            color: #94a3b8;
+            font-size: 0.9rem;
+            margin-bottom: 50px;
+        }
+
+        /* VİDEO VE ÖZELLİKLER */
         .video-container {
             background-color: var(--card-bg);
             border-radius: 12px;
             padding: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-bottom: 40px;
-            /* Placeholder for the YouTube video or GIF */
+            margin-bottom: 50px;
             height: 450px;
             display: flex;
             align-items: center;
@@ -63,62 +151,53 @@
             border-radius: 10px;
         }
         .feature-card h3 {
-            color: var(--accent-color);
+            color: #fff;
             margin-top: 0;
         }
-        .pricing {
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-radius: 12px;
-            margin-bottom: 40px;
-        }
-        .price-tag {
-            font-size: 3rem;
-            font-weight: bold;
-            color: #fff;
-        }
-        .old-price {
-            text-decoration: line-through;
-            color: #64748b;
-            font-size: 1.5rem;
-            margin-right: 10px;
-        }
-        .buy-button {
-            display: inline-block;
-            background-color: #27ae60;
-            color: white;
-            padding: 15px 40px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-top: 20px;
-            transition: background-color 0.3s;
-        }
-        .buy-button:hover {
-            background-color: #219653;
-        }
+
         .guarantee {
-            margin-top: 15px;
-            font-size: 0.9rem;
-            color: #94a3b8;
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #cbd5e1;
+            border-left: 4px solid #3b82f6;
+            text-align: left;
+            margin-top: 40px;
         }
+        
         footer {
             margin-top: 50px;
             color: #64748b;
             font-size: 0.9rem;
+            padding-bottom: 30px;
         }
     </style>
 </head>
 <body>
+
+    <header>
+        <div class="logo">OmniPad<span>.</span></div>
+        <a href="GUMROAD_LINKIN_BURAYA_GELECEK" class="nav-btn">Get OmniPad</a>
+    </header>
+
     <div class="container">
         <div class="hero">
-            <h1>CadPad</h1>
-            <h2>Turn any cheap macropad into a professional, context-aware workflow accelerator.</h2>
+            <h1>Supercharge Your Workflow.</h1>
+            <h2>Turn any cheap macropad into a professional industry-standard tool. Zero lag, zero driver conflicts, and a smart transparent HUD that understands your intent across every application.</h2>
         </div>
 
+        <div class="pricing-hero">
+            <span class="old-price">£29.99</span>
+            <span class="price-tag">£19.99</span>
+            <span class="badge">Lifetime</span>
+        </div>
+        
+        <a href="GUMROAD_LINKIN_BURAYA_GELECEK" class="main-buy-btn">Download Now</a>
+        <div class="secure-text">🔒 Secure checkout via Gumroad. Instant digital delivery.</div>
+
         <div class="video-container">
-            <p style="color: #64748b;">[ Action Video / Demo GIF will be placed here ]</p>
+            <p style="color: #64748b;">[ OmniPad Action Video / Demo GIF will be placed here ]</p>
         </div>
 
         <div class="features">
@@ -128,7 +207,7 @@
             </div>
             <div class="feature-card">
                 <h3>♾️ Universal Engine</h3>
-                <p>Not just for CAD. Jump from Revit to Photoshop, Excel, or Chrome. The HUD detects the active window in milliseconds and switches profiles automatically.</p>
+                <p>Jump from Revit to Photoshop, Excel, or Chrome. The HUD detects the active window in milliseconds and switches profiles automatically.</p>
             </div>
             <div class="feature-card">
                 <h3>⚡ One-Touch Launcher</h3>
@@ -140,21 +219,12 @@
             </div>
         </div>
 
-        <div class="pricing">
-            <p style="margin: 0; color: #94a3b8; text-transform: uppercase; letter-spacing: 2px;">Lifetime License</p>
-            <div style="margin: 15px 0;">
-                <span class="old-price">£29.99</span>
-                <span class="price-tag">£19.99</span>
-            </div>
-            <p>Includes free access to all V1.x updates. Valid for up to 2 devices.</p>
-            
-            <a href="GUMROAD_LINKIN_BURAYA_GELECEK" class="buy-button">Buy CadPad Now</a>
-            
-            <p class="guarantee">🛡️ <strong>14-Day Money-Back Guarantee.</strong> Try it in your own workflow. If it doesn't save you time, get a full refund no questions asked.</p>
+        <div class="guarantee">
+            🛡️ <strong>14-Day Money-Back Guarantee:</strong> Try OmniPad in your own workflow. If it doesn't save you hours of time every week, simply email me for a full refund—no questions asked.
         </div>
 
         <footer>
-            <p>© 2026 Cad.Services. Built for professionals.</p>
+            <p>© 2026 cad.services. Built for professionals.</p>
         </footer>
     </div>
 </body>
