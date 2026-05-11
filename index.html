@@ -105,17 +105,24 @@
 
         /* VİDEO VE ÖZELLİKLER */
         .video-container {
-            background-color: var(--card-bg);
+            background-color: #000;
             border-radius: 12px;
-            padding: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             margin-bottom: 50px;
-            height: 450px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border: 2px dashed #334155;
+            height: 500px; 
+            overflow: hidden; 
+            position: relative;
         }
+        
+        /* HTML5 Video CSS Ayarları */
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Videonun kırpılmadan tam sığmasını sağlar */
+            border: none;
+            outline: none;
+        }
+
         .features {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -172,7 +179,10 @@
         </div>
 
         <div class="video-container">
-            <p style="color: #64748b;">[ OmniHUD Action Video / Demo GIF will be placed here ]</p>
+            <video autoplay muted loop playsinline>
+                <source src="https://cdn.cad.services/advertVideo.mp4" type="video/mp4">
+                Tarayıcınız video etiketini desteklemiyor. Lütfen güncel bir tarayıcı kullanın.
+            </video>
         </div>
 
         <div class="features">
