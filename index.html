@@ -14,164 +14,214 @@
             --card-bg: #1e293b;
         }
         body {
-            margin: 0; padding: 0;
+            margin: 0;
+            padding: 0;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             background-color: var(--bg-color);
             color: var(--text-color);
             line-height: 1.6;
         }
+        
+        /* STICKY HEADER (Üst Menü) */
         header {
-            background-color: #1a202c; padding: 15px 30px;
-            display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 1000;
+            background-color: #1a202c;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
-        .logo { font-size: 1.5rem; font-weight: bold; color: white; text-decoration: none; }
-        .logo span { color: var(--accent-color); }
-        .nav-btn { background-color: var(--btn-color); color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: white;
+        }
+        .logo span {
+            color: var(--accent-color);
+        }
+        .nav-btn {
+            background-color: var(--btn-color);
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .nav-btn:hover {
+            background-color: var(--btn-hover);
+        }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; text-align: center; }
-        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; color: #ffffff; }
-        .hero h2 { font-size: 1.3rem; color: #94a3b8; margin-bottom: 30px; }
-        
+        /* ANA İÇERİK */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            color: #ffffff;
+        }
+        .hero h2 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #94a3b8;
+            margin-bottom: 30px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* MİNİMALİST BUTON VE BİLGİ ALANI */
+        .cta-section {
+            margin: 40px 0 50px 0;
+        }
         .main-buy-btn {
-            display: inline-block; background-color: var(--btn-color); color: white;
-            padding: 18px 50px; font-size: 1.3rem; font-weight: bold;
-            text-decoration: none; border-radius: 8px; box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+            display: inline-block;
+            background-color: var(--btn-color);
+            color: white;
+            padding: 18px 50px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            transition: background-color 0.3s, transform 0.1s;
+            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+        }
+        .main-buy-btn:hover {
+            background-color: var(--btn-hover);
+            transform: translateY(-2px);
+        }
+        .secure-text {
+            color: #94a3b8;
+            font-size: 0.95rem;
         }
 
-        /* MANUAL CAROUSEL */
-        .carousel-container {
-            position: relative; background-color: #000;
-            border-radius: 12px; margin: 50px 0 15px 0; width: 100%;
-            overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        /* VİDEO VE ÖZELLİKLER */
+        .video-container {
+            background-color: #000;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            margin-bottom: 50px;
+            width: 100%; /* Kutuyu genişliğe tam yayar */
+            overflow: hidden; 
+            position: relative;
+            line-height: 0; /* HTML5 video etiketinin altındaki gereksiz beyaz boşluğu engeller */
         }
-        .carousel-wrapper {
-            display: flex; transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1); width: 100%;
-        }
-        .carousel-slide { min-width: 100%; position: relative; line-height: 0; }
-        .carousel-slide video { width: 100%; height: auto; display: block; background-color: #000; }
         
-        .slide-label {
-            position: absolute; bottom: 25px; left: 25px;
-            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(8px);
-            color: var(--accent-color); padding: 10px 20px; border-radius: 6px;
-            font-size: 0.95rem; font-weight: bold; border-left: 4px solid var(--accent-color);
+        /* HTML5 Video Responsive CSS Ayarları */
+        .video-container video {
+            width: 100%;
+            height: auto; /* Sabit pikseller kalktı, orantı otomatik koruncak! */
+            display: block;
+            border: none;
+            outline: none;
         }
 
-        /* DOTS OUTSIDE & CENTERED */
-        .carousel-dots {
-            display: flex; justify-content: center; gap: 12px; margin-bottom: 50px;
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+            text-align: left;
         }
-        .dot {
-            width: 14px; height: 14px; background-color: #334155;
-            border-radius: 50%; cursor: pointer; transition: 0.3s;
+        .feature-card {
+            background-color: var(--card-bg);
+            padding: 25px;
+            border-radius: 10px;
         }
-        .dot.active { background-color: var(--accent-color); transform: scale(1.2); }
+        .feature-card h3 {
+            color: #fff;
+            margin-top: 0;
+        }
 
-        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: left; margin-bottom: 50px; }
-        .feature-card { background-color: var(--card-bg); padding: 25px; border-radius: 10px; border: 1px solid #334155; }
-        .guarantee { background-color: #1e293b; padding: 25px; border-radius: 8px; border-left: 4px solid #3b82f6; text-align: left; }
-        footer { margin-top: 60px; color: #64748b; font-size: 0.9rem; padding-bottom: 40px; }
-        footer a { color: #94a3b8; text-decoration: none; margin: 0 10px; }
+        /* İADE GARANTİSİ */
+        .guarantee {
+            background-color: #1e293b;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 1rem;
+            color: #cbd5e1;
+            border-left: 4px solid #3b82f6;
+            text-align: left;
+            margin-top: 40px;
+        }
+        
+        footer {
+            margin-top: 50px;
+            color: #64748b;
+            font-size: 0.9rem;
+            padding-bottom: 30px;
+        }
 
+        /* Mobil Cihazlar İçin Ekstra Ufak Düzenlemeler */
         @media (max-width: 600px) {
-            .hero h1 { font-size: 2.3rem; }
-            .slide-label { bottom: 15px; left: 15px; font-size: 0.8rem; }
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            .hero h2 {
+                font-size: 1.1rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="/" class="logo">OmniHUD<span>.</span></a>
+        <div class="logo">OmniHUD<span>.</span></div>
         <a href="https://k2smart.gumroad.com/l/omnihud" class="nav-btn">Get OmniHUD</a>
     </header>
 
     <div class="container">
         <div class="hero">
             <h1>Supercharge Your Workflow.</h1>
-            <h2>Smart transparent HUD that perfectly adapts to your intent.</h2>
+            <h2>Turn any cheap macropad into a professional industry-standard tool. Zero lag, zero driver conflicts, and a smart transparent HUD that understands your intent across every application.</h2>
         </div>
 
         <div class="cta-section">
             <a href="https://k2smart.gumroad.com/l/omnihud" class="main-buy-btn">Get OmniHUD!</a>
+            <div class="secure-text">🔒 Secure checkout via Gumroad. Includes Lifetime V1.x updates.</div>
         </div>
 
-        <div class="carousel-container">
-            <div class="carousel-wrapper" id="carouselWrapper">
-                <div class="carousel-slide">
-                    <video autoplay muted loop playsinline preload="auto">
-                        <source src="https://cdn.cad.services/video_revit.mp4" type="video/mp4">
-                    </video>
-                    <div class="slide-label">🏢 Revit & AutoCAD Workflow</div>
-                </div>
-                <div class="carousel-slide">
-                    <video muted loop playsinline preload="auto">
-                        <source src="https://cdn.cad.services/video_vscode.mp4" type="video/mp4">
-                    </video>
-                    <div class="slide-label">💻 VSCode & Excel Optimization</div>
-                </div>
-                <div class="carousel-slide">
-                    <video muted loop playsinline preload="auto">
-                        <source src="https://cdn.cad.services/video_creative.mp4" type="video/mp4">
-                    </video>
-                    <div class="slide-label">🎨 Creative & Design Dashboards</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="carousel-dots">
-            <span class="dot active" onclick="manualNav(0)"></span>
-            <span class="dot" onclick="manualNav(1)"></span>
-            <span class="dot" onclick="manualNav(2)"></span>
+        <div class="video-container">
+            <video autoplay muted loop playsinline>
+                <source src="https://cdn.cad.services/advertVideo.mp4" type="video/mp4">
+                Tarayıcınız video etiketini desteklemiyor. Lütfen güncel bir tarayıcı kullanın.
+            </video>
         </div>
 
         <div class="features">
-            <div class="feature-card"><h3>👁️ Smart HUD</h3><p>Zero-latency overlay shows active keybinds.</p></div>
-            <div class="feature-card"><h3>♾️ Universal</h3><p>Automatic profile switching in milliseconds.</p></div>
-            <div class="feature-card"><h3>⚡ Launch</h3><p>One-touch access to apps and websites.</p></div>
-            <div class="feature-card"><h3>🛡️ Pro-Grade</h3><p>No drivers, no admin rights required.</p></div>
+            <div class="feature-card">
+                <h3>👁️ Smart Transparent HUD</h3>
+                <p>Never memorize shortcuts again. An elegant, zero-latency overlay shows your active keybinds directly on your screen.</p>
+            </div>
+            <div class="feature-card">
+                <h3>♾️ Universal Engine</h3>
+                <p>Jump from Revit to Photoshop, Excel, or Chrome. The HUD detects the active window in milliseconds and switches profiles automatically.</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ One-Touch Launcher</h3>
+                <p>Map any key to instantly open specific .exe files or your favorite websites. Your macropad becomes a physical dashboard for your entire OS.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🛡️ Driver-Free Setup</h3>
+                <p>Runs natively on Windows using safe Hyper Key architecture. No bloated hardware software, no admin rights required. IT-friendly.</p>
+            </div>
         </div>
 
         <div class="guarantee">
-            🛡️ 14-Day Money-Back Guarantee: Full refund if it doesn't save you time.
+            🛡️ <strong>14-Day Money-Back Guarantee:</strong> Try OmniHUD in your own workflow. If it doesn't save you hours of time every week, simply email me for a full refund—no questions asked.
         </div>
 
         <footer>
-            <p>© 2026 cad.services</p>
-            <p><a href="/support#help">Help</a> | <a href="/support#privacy">Privacy</a> | <a href="/support#terms">Terms</a></p>
+            <p>© 2026 cad.services. Built for professionals.</p>
         </footer>
     </div>
-
-    <script>
-        const wrapper = document.getElementById('carouselWrapper');
-        const videos = document.querySelectorAll('.carousel-slide video');
-        const dots = document.querySelectorAll('.dot');
-        let currentIndex = 0;
-
-        function manualNav(index) {
-            // Eski videoyu durdur (isteğe bağlı, enerji tasarrufu için)
-            videos[currentIndex].pause();
-            
-            // Yeni index'e kaydır
-            currentIndex = index;
-            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
-            
-            // Noktaları güncelle
-            dots.forEach((dot, i) => dot.classList.toggle('active', i === currentIndex));
-
-            // Yeni videoyu oynat (sessiz olduğu için autoplay engeline takılmaz)
-            const activeVideo = videos[currentIndex];
-            activeVideo.play().catch(error => {
-                console.log("Play interrupted or blocked.");
-            });
-        }
-
-        // İlk sayfa yüklendiğinde ilk videoyu başlat
-        window.onload = () => {
-            videos[0].play();
-        };
-    </script>
 </body>
 </html>
