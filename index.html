@@ -17,15 +17,15 @@
         header { background-color: #1a202c; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.3); }
         .logo { font-size: 1.5rem; font-weight: bold; color: white; text-decoration: none; }
         .logo span { color: var(--accent-color); }
-        .nav-btn { background-color: var(--btn-color); color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; }
+        .nav-btn { background-color: var(--btn-color); color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; transition: 0.3s; }
+        .nav-btn:hover { background-color: var(--btn-hover); }
 
-        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; text-align: center; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; text-align: center; }
         .hero h1 { font-size: 3.5rem; margin-bottom: 10px; color: #ffffff; }
-        .hero h2 { font-size: 1.2rem; color: #94a3b8; margin-bottom: 30px; }
+        .hero h2 { font-size: 1.2rem; color: #94a3b8; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto; }
 
-        /* PLAYLIST PLAYER */
-        .video-player-box {
-            position: relative;
+        /* VİDEO BOX GENEL STİL */
+        .video-box {
             background-color: #000;
             border-radius: 12px;
             margin: 40px 0;
@@ -33,29 +33,42 @@
             overflow: hidden;
             box-shadow: 0 15px 40px rgba(0,0,0,0.6);
             border: 1px solid #334155;
-            cursor: pointer;
+            line-height: 0;
         }
+        video { width: 100%; height: auto; display: block; }
 
-        #mainVideo { width: 100%; height: auto; display: block; opacity: 1; transition: opacity 0.4s ease-in-out; }
-        
-        /* Badge for the current video title */
-        .video-status { position: absolute; top: 20px; right: 20px; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(5px); color: var(--accent-color); padding: 6px 12px; border-radius: 4px; font-size: 0.8rem; font-weight: bold; text-transform: uppercase; z-index: 5; }
-
-        /* Play Overlay Logic */
-        .play-overlay {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.4); display: flex; justify-content: center; align-items: center;
-            z-index: 10; transition: opacity 0.3s;
+        /* ÖZELLİKLER (FEATURES) */
+        .features { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); 
+            gap: 30px; 
+            margin: 80px 0; 
+            text-align: left; 
         }
-        .play-button {
-            width: 70px; height: 70px; background-color: var(--accent-color); border-radius: 50%;
-            display: flex; justify-content: center; align-items: center; box-shadow: 0 0 20px rgba(241, 196, 15, 0.4);
+        .feature-card { 
+            background-color: var(--card-bg); 
+            padding: 30px; 
+            border-radius: 12px; 
+            border: 1px solid #334155; 
+            transition: transform 0.3s;
         }
-        .play-button svg { fill: #0f172a; width: 30px; height: 30px; margin-left: 5px; }
-        
-        .playing .play-overlay { opacity: 0; pointer-events: none; }
+        .feature-card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+        .feature-card h3 { color: var(--accent-color); margin-top: 0; font-size: 1.4rem; }
+        .feature-card p { color: #cbd5e1; font-size: 1rem; }
 
-        footer { margin-top: 60px; color: #64748b; font-size: 0.9rem; padding-bottom: 40px; }
+        /* ARA BUTON */
+        .mid-cta { margin: 60px 0; }
+        .buy-btn { 
+            display: inline-block; background-color: var(--btn-color); color: white; 
+            padding: 18px 50px; font-size: 1.3rem; font-weight: bold; 
+            text-decoration: none; border-radius: 8px; box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+            transition: 0.3s;
+        }
+        .buy-btn:hover { background-color: var(--btn-hover); transform: scale(1.05); }
+
+        /* İADE VE FOOTER */
+        .guarantee { background-color: #1e293b; padding: 25px; border-radius: 8px; border-left: 4px solid #3b82f6; text-align: left; margin: 40px 0; }
+        footer { margin-top: 80px; color: #64748b; font-size: 0.9rem; padding-bottom: 40px; border-top: 1px solid #1e293b; padding-top: 40px; }
         footer a { color: #94a3b8; text-decoration: none; margin: 0 10px; }
     </style>
 </head>
@@ -69,73 +82,89 @@
     <div class="container">
         <div class="hero">
             <h1>Workflow Automation, Redefined.</h1>
-            <h2>Experience the future of productivity with our dual-video showcase.</h2>
+            <h2>Turn any cheap macropad into a professional tool with a smart, transparent HUD.</h2>
         </div>
 
-        <div id="playerBox" class="video-player-box">
-            <div id="videoBadge" class="video-status">Intro Clip</div>
-            
-            <div id="playOverlay" class="play-overlay">
-                <div class="play-button">
-                    <svg viewBox="0 0 448 512"><path d="M424.4 214.7L72.4 6.6C43.8-10.3 0 6.1 0 47.9V464c0 37.5 40.7 60.1 72.4 41.3l352-208c31.4-18.5 31.5-64.1 0-82.6z"/></svg>
-                </div>
-            </div>
-            
-            <video id="mainVideo" muted playsinline preload="auto">
+        <div class="video-box">
+            <video id="introVideo" autoplay muted loop playsinline>
                 <source src="https://cdn.cad.services/advertVideo.mp4" type="video/mp4">
             </video>
         </div>
 
+        <div class="features">
+            <div class="feature-card">
+                <h3>👁️ Smart Transparent HUD</h3>
+                <p>No more memorizing complex keybinds. An elegant, zero-latency overlay shows your active shortcuts directly on your screen.</p>
+            </div>
+            <div class="feature-card">
+                <h3>♾️ Universal Engine</h3>
+                <p>Works across Revit, AutoCAD, VSCode, Photoshop, and Excel. It detects the active window and switches profiles in milliseconds.</p>
+            </div>
+            <div class="feature-card">
+                <h3>⚡ One-Touch Launcher</h3>
+                <p>Map any key to instantly open apps, websites, or specific project files. Your macropad becomes a physical dashboard.</p>
+            </div>
+            <div class="feature-card">
+                <h3>🛡️ Driver-Free Setup</h3>
+                <p>Built with safe Hyper Key architecture. No bloated hardware software required. IT-friendly and lightweight.</p>
+            </div>
+        </div>
+
+        <div class="mid-cta">
+            <a href="https://k2smart.gumroad.com/l/omnihud" class="buy-btn">Start Saving Time Now!</a>
+            <p style="color: #94a3b8; margin-top: 15px; font-size: 0.9rem;">Secure checkout via Gumroad. Instant delivery.</p>
+        </div>
+
+        <div class="hero">
+            <h2 style="color: #fff;">See it in Action</h2>
+            <p style="color: #94a3b8;">A full demonstration of OmniHUD's power in real-world professional scenarios.</p>
+        </div>
+
+        <div class="video-box">
+            <video id="scrollVideo" muted playsinline>
+                <source src="https://cdn.cad.services/fullVideo.mp4" type="video/mp4">
+            </video>
+        </div>
+
+        <div class="guarantee">
+            🛡️ <strong>14-Day Money-Back Guarantee:</strong> Full refund if OmniHUD doesn't revolutionize your workflow. No questions asked.
+        </div>
+
         <footer>
-            <p>© 2026 cad.services | <a href="/support#help">Help</a> | <a href="/support#terms">Terms</a></p>
+            <p>© 2026 cad.services | <a href="/support#help">Help</a> | <a href="/support#privacy">Privacy</a> | <a href="/support#terms">Terms</a></p>
         </footer>
     </div>
 
     <script>
-        const playerBox = document.getElementById('playerBox');
-        const videoElement = document.getElementById('mainVideo');
-        const badgeElement = document.getElementById('videoBadge');
+        // Intersection Observer ile videoyu takip et
+        const observerOptions = {
+            root: null, // viewport'u kullan
+            threshold: 0.5 // Videonun %50'si göründüğünde tetikle
+        };
 
-        // GÜNCEL PLAYLIST
-        const playlist = [
-            { src: "https://cdn.cad.services/advertVideo.mp4", label: "Quick Intro" },
-            { src: "https://cdn.cad.services/fullVideo.mp4", label: "Full Showcase" }
-        ];
+        const scrollVideo = document.getElementById('scrollVideo');
 
-        let currentTrack = 0;
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Görünür olduğunda oynat
+                    scrollVideo.play().catch(error => {
+                        console.log("Autoplay blocked by browser. User interaction needed.");
+                    });
+                } else {
+                    // Ekrandan çıkınca durdur (performans için)
+                    scrollVideo.pause();
+                }
+            });
+        }, observerOptions);
 
-        // Tıklayınca başlat
-        playerBox.addEventListener('click', () => {
-            if (videoElement.paused) {
-                videoElement.play().then(() => {
-                    playerBox.classList.add('playing');
-                });
-            }
-        });
+        observer.observe(scrollVideo);
 
-        // Video bittiğinde diğerine geç
-        videoElement.addEventListener('ended', () => {
-            currentTrack++;
-            
-            // İkinci video bittikten sonra başa dönsün mü? (Döngü için kalsın)
-            if (currentTrack >= playlist.length) {
-                currentTrack = 0;
-            }
-
-            playTrack(currentTrack);
-        });
-
-        function playTrack(index) {
-            videoElement.style.opacity = 0; // Yumuşak geçiş
-            
-            setTimeout(() => {
-                videoElement.src = playlist[index].src;
-                badgeElement.innerText = playlist[index].label;
-                videoElement.load();
-                videoElement.play();
-                videoElement.style.opacity = 1;
-            }, 400);
-        }
+        // Tarayıcı engelini aşmak için herhangi bir tıklamada ilk videonun oynamasını garanti et
+        document.body.addEventListener('click', () => {
+            const intro = document.getElementById('introVideo');
+            if (intro.paused) intro.play();
+        }, { once: true });
     </script>
 </body>
 </html>
