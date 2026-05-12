@@ -14,214 +14,149 @@
             --card-bg: #1e293b;
         }
         body {
-            margin: 0;
-            padding: 0;
+            margin: 0; padding: 0;
             font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-color);
-            color: var(--text-color);
+            background-color: var(--bg-color); color: var(--text-color);
             line-height: 1.6;
         }
-        
-        /* STICKY HEADER (Üst Menü) */
         header {
-            background-color: #1a202c;
-            padding: 15px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background-color: #1a202c; padding: 15px 30px;
+            display: flex; justify-content: space-between; align-items: center;
+            position: sticky; top: 0; z-index: 1000;
             box-shadow: 0 4px 6px rgba(0,0,0,0.3);
         }
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: white;
-        }
-        .logo span {
-            color: var(--accent-color);
-        }
-        .nav-btn {
-            background-color: var(--btn-color);
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 6px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        .nav-btn:hover {
-            background-color: var(--btn-hover);
-        }
+        .logo { font-size: 1.5rem; font-weight: bold; color: white; text-decoration: none; }
+        .logo span { color: var(--accent-color); }
+        .nav-btn { background-color: var(--btn-color); color: white; text-decoration: none; padding: 10px 20px; border-radius: 6px; font-weight: bold; }
 
-        /* ANA İÇERİK */
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 60px 20px;
-            text-align: center;
-        }
-        .hero h1 {
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-            color: #ffffff;
-        }
-        .hero h2 {
-            font-size: 1.3rem;
-            font-weight: 400;
-            color: #94a3b8;
-            margin-bottom: 30px;
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
-        }
+        .container { max-width: 1000px; margin: 0 auto; padding: 60px 20px; text-align: center; }
+        .hero h1 { font-size: 3.5rem; margin-bottom: 10px; color: #ffffff; }
+        .hero h2 { font-size: 1.3rem; color: #94a3b8; margin-bottom: 30px; }
 
-        /* MİNİMALİST BUTON VE BİLGİ ALANI */
-        .cta-section {
-            margin: 40px 0 50px 0;
-        }
-        .main-buy-btn {
-            display: inline-block;
-            background-color: var(--btn-color);
-            color: white;
-            padding: 18px 50px;
-            font-size: 1.3rem;
-            font-weight: bold;
-            text-decoration: none;
-            border-radius: 8px;
-            margin-bottom: 12px;
-            transition: background-color 0.3s, transform 0.1s;
-            box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
-        }
-        .main-buy-btn:hover {
-            background-color: var(--btn-hover);
-            transform: translateY(-2px);
-        }
-        .secure-text {
-            color: #94a3b8;
-            font-size: 0.95rem;
-        }
-
-        /* VİDEO VE ÖZELLİKLER */
-        .video-container {
+        /* SEQUENTIAL VIDEO PLAYER CONTAINER */
+        .video-player-box {
+            position: relative;
             background-color: #000;
             border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            margin-bottom: 50px;
-            width: 100%; /* Kutuyu genişliğe tam yayar */
-            overflow: hidden; 
-            position: relative;
-            line-height: 0; /* HTML5 video etiketinin altındaki gereksiz beyaz boşluğu engeller */
-        }
-        
-        /* HTML5 Video Responsive CSS Ayarları */
-        .video-container video {
+            margin: 40px 0;
             width: 100%;
-            height: auto; /* Sabit pikseller kalktı, orantı otomatik koruncak! */
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.6);
+            border: 1px solid #334155;
+            line-height: 0;
+        }
+
+        #mainVideo {
+            width: 100%;
+            height: auto;
             display: block;
-            border: none;
-            outline: none;
+            transition: opacity 0.4s ease-in-out;
         }
 
-        .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-bottom: 50px;
-            text-align: left;
-        }
-        .feature-card {
-            background-color: var(--card-bg);
-            padding: 25px;
-            border-radius: 10px;
-        }
-        .feature-card h3 {
-            color: #fff;
-            margin-top: 0;
-        }
-
-        /* İADE GARANTİSİ */
-        .guarantee {
-            background-color: #1e293b;
-            padding: 20px;
-            border-radius: 8px;
-            font-size: 1rem;
-            color: #cbd5e1;
-            border-left: 4px solid #3b82f6;
-            text-align: left;
-            margin-top: 40px;
-        }
-        
-        footer {
-            margin-top: 50px;
-            color: #64748b;
-            font-size: 0.9rem;
-            padding-bottom: 30px;
+        /* VİDEO ÜZERİNDEKİ ETİKET */
+        .video-status {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(5px);
+            color: var(--accent-color);
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border: 1px solid rgba(241, 196, 15, 0.3);
         }
 
-        /* Mobil Cihazlar İçin Ekstra Ufak Düzenlemeler */
-        @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .hero h2 {
-                font-size: 1.1rem;
-            }
-        }
+        .features { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 30px; text-align: left; margin-top: 50px; }
+        .feature-card { background-color: var(--card-bg); padding: 25px; border-radius: 10px; border: 1px solid #334155; }
+        footer { margin-top: 60px; color: #64748b; font-size: 0.9rem; padding-bottom: 40px; border-top: 1px solid #1e293b; padding-top: 40px;}
+        footer a { color: #94a3b8; text-decoration: none; margin: 0 10px; }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">OmniHUD<span>.</span></div>
+        <a href="/" class="logo">OmniHUD<span>.</span></a>
         <a href="https://k2smart.gumroad.com/l/omnihud" class="nav-btn">Get OmniHUD</a>
     </header>
 
     <div class="container">
         <div class="hero">
             <h1>Supercharge Your Workflow.</h1>
-            <h2>Turn any cheap macropad into a professional industry-standard tool. Zero lag, zero driver conflicts, and a smart transparent HUD that understands your intent across every application.</h2>
+            <h2>One tool. Every app. Seamless automation.</h2>
         </div>
 
-        <div class="cta-section">
-            <a href="https://k2smart.gumroad.com/l/omnihud" class="main-buy-btn">Get OmniHUD!</a>
-            <div class="secure-text">🔒 Secure checkout via Gumroad. Includes Lifetime V1.x updates.</div>
-        </div>
-
-        <div class="video-container">
-            <video autoplay muted loop playsinline>
-                <source src="https://cdn.cad.services/advertVideo.mp4" type="video/mp4">
-                Tarayıcınız video etiketini desteklemiyor. Lütfen güncel bir tarayıcı kullanın.
+        <div class="video-player-box">
+            <div id="videoBadge" class="video-status">Revit Workflow</div>
+            
+            <video id="mainVideo" autoplay muted playsinline preload="auto">
+                <source src="https://cdn.cad.services/video_revit.mp4" type="video/mp4">
             </video>
         </div>
 
         <div class="features">
-            <div class="feature-card">
-                <h3>👁️ Smart Transparent HUD</h3>
-                <p>Never memorize shortcuts again. An elegant, zero-latency overlay shows your active keybinds directly on your screen.</p>
-            </div>
-            <div class="feature-card">
-                <h3>♾️ Universal Engine</h3>
-                <p>Jump from Revit to Photoshop, Excel, or Chrome. The HUD detects the active window in milliseconds and switches profiles automatically.</p>
-            </div>
-            <div class="feature-card">
-                <h3>⚡ One-Touch Launcher</h3>
-                <p>Map any key to instantly open specific .exe files or your favorite websites. Your macropad becomes a physical dashboard for your entire OS.</p>
-            </div>
-            <div class="feature-card">
-                <h3>🛡️ Driver-Free Setup</h3>
-                <p>Runs natively on Windows using safe Hyper Key architecture. No bloated hardware software, no admin rights required. IT-friendly.</p>
-            </div>
-        </div>
-
-        <div class="guarantee">
-            🛡️ <strong>14-Day Money-Back Guarantee:</strong> Try OmniHUD in your own workflow. If it doesn't save you hours of time every week, simply email me for a full refund—no questions asked.
+            <div class="feature-card"><h3>👁️ Smart HUD</h3><p>Real-time visual feedback for your macros.</p></div>
+            <div class="feature-card"><h3>♾️ Universal</h3><p>Works across all CAD, coding, and creative apps.</p></div>
+            <div class="feature-card"><h3>🛡️ Pro-Grade</h3><p>No bloated drivers. Safe and lightweight.</p></div>
         </div>
 
         <footer>
-            <p>© 2026 cad.services. Built for professionals.</p>
+            <p>© 2026 cad.services | <a href="/support#privacy">Privacy</a> | <a href="/support#terms">Terms</a></p>
         </footer>
     </div>
+
+    <script>
+        const videoElement = document.getElementById('mainVideo');
+        const badgeElement = document.getElementById('videoBadge');
+
+        // Playlist ve Başlıklar
+        const playlist = [
+            { src: "https://cdn.cad.services/advertVideo.mp4", label: "Revit & AutoCAD Workflow" },
+            { src: "https://cdn.cad.services/video_vscode.mp4", label: "VSCode & Coding Optimization" },
+            { src: "https://cdn.cad.services/video_creative.mp4", label: "Creative & Design Dashboards" }
+        ];
+
+        let currentTrack = 0;
+
+        // Video bittiğinde bir sonrakine geç
+        videoElement.addEventListener('ended', () => {
+            currentTrack++;
+            
+            // Eğer listenin sonuna geldiysek başa dön
+            if (currentTrack >= playlist.length) {
+                currentTrack = 0;
+            }
+
+            playTrack(currentTrack);
+        });
+
+        function playTrack(index) {
+            // Hafif bir geçiş efekti için opaklığı düşür
+            videoElement.style.opacity = 0;
+
+            setTimeout(() => {
+                // Kaynağı ve başlığı değiştir
+                videoElement.src = playlist[index].src;
+                badgeElement.innerText = playlist[index].label;
+                
+                // Videoyu yükle ve oynat
+                videoElement.load();
+                videoElement.play();
+                
+                // Geri görünür yap
+                videoElement.style.opacity = 1;
+            }, 400); // 400ms geçiş süresi
+        }
+
+        // Tarayıcı autoplay engeli durumunda sayfaya ilk tıklamada videoyu zorla başlat
+        document.body.addEventListener('click', () => {
+            if (videoElement.paused) {
+                videoElement.play();
+            }
+        }, { once: true });
+    </script>
 </body>
 </html>
