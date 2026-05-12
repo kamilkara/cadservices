@@ -22,7 +22,7 @@
             line-height: 1.6;
         }
         
-        /* STICKY HEADER (Üst Menü) */
+        /* STICKY HEADER */
         header {
             background-color: #1a202c;
             padding: 15px 30px;
@@ -38,6 +38,7 @@
             font-size: 1.5rem;
             font-weight: bold;
             color: white;
+            text-decoration: none;
         }
         .logo span {
             color: var(--accent-color);
@@ -55,7 +56,7 @@
             background-color: var(--btn-hover);
         }
 
-        /* ANA İÇERİK */
+        /* CONTAINER */
         .container {
             max-width: 1000px;
             margin: 0 auto;
@@ -77,7 +78,7 @@
             margin-right: auto;
         }
 
-        /* MİNİMALİST BUTON VE BİLGİ ALANI */
+        /* CTA SECTION */
         .cta-section {
             margin: 40px 0 50px 0;
         }
@@ -103,30 +104,69 @@
             font-size: 0.95rem;
         }
 
-        /* VİDEO VE ÖZELLİKLER */
-        .video-container {
+        /* VIDEO CAROUSEL */
+        .carousel-container {
+            position: relative;
             background-color: #000;
             border-radius: 12px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
             margin-bottom: 50px;
-            width: 100%; /* Kutuyu genişliğe tam yayar */
-            overflow: hidden; 
-            position: relative;
-            line-height: 0; /* HTML5 video etiketinin altındaki gereksiz beyaz boşluğu engeller */
-        }
-        
-        /* HTML5 Video Responsive CSS Ayarları */
-        .video-container video {
             width: 100%;
-            height: auto; /* Sabit pikseller kalktı, orantı otomatik koruncak! */
+            overflow: hidden;
+        }
+        .carousel-wrapper {
+            display: flex;
+            transition: transform 0.6s cubic-bezier(0.45, 0, 0.55, 1);
+            width: 100%;
+        }
+        .carousel-slide {
+            min-width: 100%;
+            position: relative;
+            line-height: 0;
+        }
+        .carousel-slide video {
+            width: 100%;
+            height: auto;
             display: block;
-            border: none;
-            outline: none;
+        }
+        .slide-label {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(5px);
+            color: var(--accent-color);
+            padding: 8px 15px;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border-left: 3px solid var(--accent-color);
+            pointer-events: none;
+        }
+        .carousel-dots {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            display: flex;
+            gap: 8px;
+        }
+        .dot {
+            width: 10px;
+            height: 10px;
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .dot.active {
+            background-color: var(--accent-color);
+            transform: scale(1.2);
         }
 
+        /* FEATURES */
         .features {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
             gap: 30px;
             margin-bottom: 50px;
             text-align: left;
@@ -135,16 +175,23 @@
             background-color: var(--card-bg);
             padding: 25px;
             border-radius: 10px;
+            border: 1px solid #334155;
         }
         .feature-card h3 {
             color: #fff;
             margin-top: 0;
+            font-size: 1.1rem;
+        }
+        .feature-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            margin-bottom: 0;
         }
 
-        /* İADE GARANTİSİ */
+        /* GUARANTEE */
         .guarantee {
             background-color: #1e293b;
-            padding: 20px;
+            padding: 25px;
             border-radius: 8px;
             font-size: 1rem;
             color: #cbd5e1;
@@ -154,34 +201,40 @@
         }
         
         footer {
-            margin-top: 50px;
+            margin-top: 60px;
             color: #64748b;
             font-size: 0.9rem;
-            padding-bottom: 30px;
+            padding-bottom: 40px;
+        }
+        footer a {
+            color: #94a3b8;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        footer a:hover {
+            color: var(--accent-color);
         }
 
-        /* Mobil Cihazlar İçin Ekstra Ufak Düzenlemeler */
+        /* MOBILE FIXES */
         @media (max-width: 600px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .hero h2 {
-                font-size: 1.1rem;
-            }
+            .hero h1 { font-size: 2.3rem; }
+            .hero h2 { font-size: 1.1rem; }
+            .slide-label { font-size: 0.75rem; bottom: 10px; left: 10px; }
+            .carousel-dots { bottom: 10px; right: 10px; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="logo">OmniHUD<span>.</span></div>
+        <a href="/" class="logo">OmniHUD<span>.</span></a>
         <a href="https://k2smart.gumroad.com/l/omnihud" class="nav-btn">Get OmniHUD</a>
     </header>
 
     <div class="container">
         <div class="hero">
             <h1>Supercharge Your Workflow.</h1>
-            <h2>Turn any cheap macropad into a professional industry-standard tool. Zero lag, zero driver conflicts, and a smart transparent HUD that understands your intent across every application.</h2>
+            <h2>Turn any cheap macropad into a professional industry-standard tool. A smart transparent HUD that adapts to your intent across every application.</h2>
         </div>
 
         <div class="cta-section">
@@ -189,29 +242,50 @@
             <div class="secure-text">🔒 Secure checkout via Gumroad. Includes Lifetime V1.x updates.</div>
         </div>
 
-        <div class="video-container">
-            <video autoplay muted loop playsinline>
-                <source src="https://cdn.cad.services/advertVideo.mp4" type="video/mp4">
-                Tarayıcınız video etiketini desteklemiyor. Lütfen güncel bir tarayıcı kullanın.
-            </video>
+        <div class="carousel-container">
+            <div class="carousel-wrapper" id="carouselWrapper">
+                <div class="carousel-slide">
+                    <video autoplay muted loop playsinline>
+                        <source src="https://cdn.cad.services/video_revit.mp4" type="video/mp4">
+                    </video>
+                    <div class="slide-label">🏢 Revit & AutoCAD Workflow</div>
+                </div>
+                <div class="carousel-slide">
+                    <video autoplay muted loop playsinline>
+                        <source src="https://cdn.cad.services/video_vscode.mp4" type="video/mp4">
+                    </video>
+                    <div class="slide-label">💻 VSCode & Excel Optimization</div>
+                </div>
+                <div class="carousel-slide">
+                    <video autoplay muted loop playsinline>
+                        <source src="https://cdn.cad.services/video_creative.mp4" type="video/mp4">
+                    </video>
+                    <div class="slide-label">🎨 Creative & Design Dashboards</div>
+                </div>
+            </div>
+            <div class="carousel-dots">
+                <span class="dot active" onclick="currentSlide(0)"></span>
+                <span class="dot" onclick="currentSlide(1)"></span>
+                <span class="dot" onclick="currentSlide(2)"></span>
+            </div>
         </div>
 
         <div class="features">
             <div class="feature-card">
-                <h3>👁️ Smart Transparent HUD</h3>
-                <p>Never memorize shortcuts again. An elegant, zero-latency overlay shows your active keybinds directly on your screen.</p>
+                <h3>👁️ Smart HUD</h3>
+                <p>Elegant, zero-latency overlay shows your active keybinds directly on your screen.</p>
             </div>
             <div class="feature-card">
                 <h3>♾️ Universal Engine</h3>
-                <p>Jump from Revit to Photoshop, Excel, or Chrome. The HUD detects the active window in milliseconds and switches profiles automatically.</p>
+                <p>Detects active windows in milliseconds and switches profiles automatically.</p>
             </div>
             <div class="feature-card">
-                <h3>⚡ One-Touch Launcher</h3>
-                <p>Map any key to instantly open specific .exe files or your favorite websites. Your macropad becomes a physical dashboard for your entire OS.</p>
+                <h3>⚡ One-Touch Launch</h3>
+                <p>Map any key to instantly open apps, .exe files, or your favorite websites.</p>
             </div>
             <div class="feature-card">
-                <h3>🛡️ Driver-Free Setup</h3>
-                <p>Runs natively on Windows using safe Hyper Key architecture. No bloated hardware software, no admin rights required. IT-friendly.</p>
+                <h3>🛡️ Driver-Free</h3>
+                <p>Safe Hyper Key architecture. No bloated software or admin rights required.</p>
             </div>
         </div>
 
@@ -221,7 +295,45 @@
 
         <footer>
             <p>© 2026 cad.services. Built for professionals.</p>
+            <p>
+                <a href="/support#help">Help</a> | 
+                <a href="/support#privacy">Privacy</a> | 
+                <a href="/support#terms">Terms</a>
+            </p>
         </footer>
     </div>
+
+    <script>
+        let currentIndex = 0;
+        const wrapper = document.getElementById('carouselWrapper');
+        const dots = document.querySelectorAll('.dot');
+        const totalSlides = dots.length;
+
+        function updateCarousel() {
+            wrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function currentSlide(index) {
+            currentIndex = index;
+            updateCarousel();
+            resetTimer();
+        }
+
+        let slideTimer = setInterval(() => {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateCarousel();
+        }, 6000);
+
+        function resetTimer() {
+            clearInterval(slideTimer);
+            slideTimer = setInterval(() => {
+                currentIndex = (currentIndex + 1) % totalSlides;
+                updateCarousel();
+            }, 6000);
+        }
+    </script>
 </body>
 </html>
